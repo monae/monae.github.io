@@ -53,7 +53,7 @@
         var criticalInput = document.getElementById('critical');
         var normaInput = document.getElementById('norma');
         var answerElement = document.getElementById('answer');
-        dicesInput.onchange = criticalInput.onchange = normaInput.onchange = function () {
+        dicesInput.oninput = criticalInput.oninput = normaInput.oninput = function () {
             var dices = parseInt(dicesInput.value, 10) || 0;
             var critical = parseInt(criticalInput.value, 10) || 0;
             var norma = parseInt(normaInput.value, 10) || 0;
