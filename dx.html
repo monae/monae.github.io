@@ -74,7 +74,8 @@
                 var norma1 = Math.floor(norma / 10);
                 var result1 = Math.pow((11 - critical) / 10, norma1);
                 var norma0 = Math.max(1, Math.min(critical, norma % 10));
-                return result1 * (1 - (norma0 - 1) / 10);
+                var result0 = (11 - norma0) / 10;
+                return result1 * result0;
             }
         }
 
