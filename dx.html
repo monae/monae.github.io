@@ -44,7 +44,8 @@
     <span id="answer">10</span>%
     <script type="text/javascript">
         window.onresize = function () {
-            var fontSize = Math.floor(document.documentElement.clientWidth / 12);
+            var documentWidth = document.documentElement.clientWidth;
+            var fontSize = Math.max(10, Math.floor(documentWidth / 12));
             document.body.style.fontSize = fontSize + 'px';
         };
         window.onresize();
