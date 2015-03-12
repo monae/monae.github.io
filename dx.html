@@ -55,14 +55,14 @@
         var normaInput = document.getElementById('norma');
         var answerElement = document.getElementById('answer');
         dicesInput.oninput = criticalInput.oninput = normaInput.oninput = function () {
-            var dices = parseInt(dicesInput.value, 10) || 0;
-            var critical = parseInt(criticalInput.value, 10) || 0;
-            var norma = parseInt(normaInput.value, 10) || 0;
+            var dices = +dicesInput.value;
+            var critical = +criticalInput.value;
+            var norma = +normaInput.value;
             answerElement.innerHTML = formatPercent(dx(dices, critical, norma));
         }
 
         function dx(dices, critical, norma) {
-            return dices >= 1 ? 1 - Math.pow(1 - dx1(critical, norma), dices) : 0;
+            return dices > 0 ? 1 - Math.pow(1 - dx1(critical, norma), dices) : 0;
         }
 
         function dx1(critical, norma) {
@@ -71,9 +71,9 @@
             } else if (critical >= 11) {
                 return Math.max(0, 11 - norma) / 10;
             } else {
-                var norma1 = Math.floor(norma / 10);
+                var norma1 = Math.floor((norma - 1) / 10);
                 var result1 = Math.pow((11 - critical) / 10, norma1);
-                var norma0 = Math.max(1, Math.min(critical, norma % 10));
+                var norma0 = Math.max(1, Math.min(critical, norma - norma1 * 10));
                 var result0 = (11 - norma0) / 10;
                 return result1 * result0;
             }
