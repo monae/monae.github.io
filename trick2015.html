@@ -441,8 +441,8 @@ Most complexとか、Most viralとかそういうの。<br>
 <p>ここの文は二つの文字列を空白を埋めて合成しています。</p>
 
 <div class="code-frame" data-lang="rb"><div class="highlight"><pre><span class="n">s</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span><span class="o">[</span><span class="vg">$`</span><span class="o">.</span><span class="n">size</span><span class="o">]</span> <span class="o">||</span> <span class="s2">" "</span> <span class="p">}</span>
-<span class="c1"># s = "  AA    AA"</span>
-<span class="c1"># t = "B   B B   BB"</span>
+<span class="c1"># r = "  AA    AA"</span>
+<span class="c1"># s = "B   B B   BB"</span>
 <span class="c1">#  =&gt; "B AAB B AABB"</span>
 </pre></div></div>
 
