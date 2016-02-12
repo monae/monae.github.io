@@ -1,4 +1,5 @@
 body {
+    margin: 12px;
     line-height: 1.45;
     font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #fff;
@@ -8,7 +9,8 @@ body {
 h2 {
     margin: 2em 0 0.8em;
     font-size: 80%;
-    letter-spacing: 0.7em;
+    font-family: Optima, 'Times New Roman', serif;
+    letter-spacing: 0.6em;
     border-bottom: 1px solid #000;
 }
 
@@ -16,4 +18,11 @@ hr {
     margin: 1em 0;
     border: none;
     border-top: 1px dashed #000;
+}
+
+.box {
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
+    background-color: #f2f2f2;
+    border-radius: 6px;
 }
