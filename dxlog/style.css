@@ -26,3 +26,7 @@ hr {
     background-color: #f2f2f2;
     border-radius: 6px;
 }
+
+pre {
+    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+}
