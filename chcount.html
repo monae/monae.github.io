@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <title>文字数カウント・リターンズ</title>
+    <style>
+      html {
+        background-color: #ccc;
+      }
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2px 12px;
+        background-color: #fff;
+        color: #333;
+      }
+      #textarea {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 12em;
+        padding: 8px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #000;
+      }
+      #input-actions {
+        text-align: right;
+      }
+      .notice {
+        font-size: 85%;
+        color: #999;
+      }
+      #result {
+        margin: 0 auto;
+        border-collapse: collapse;
+      }
+      #result tr {
+        border-bottom: 1px solid #ccc;
+      }
+      #result th {
+        padding: 2px;
+        text-align: left;
+        color: #666;
+        font-weight: normal;
+      }
+      #result td.value {
+        min-width: 3em;
+        padding: 2px 8px;
+        text-align: right;
+        color: #328d4d;
+        font-weight: bold;
+      }
+      #result td.actions {
+        padding: 2px 12px;
+      }
+      #result td.actions button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+
+        color: #5793cc;
+        font-size: 11px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>文字数カウント・リターンズ</h1>
+    <textarea id="textarea" placeholder="テキストを入力"></textarea>
+    <div id="input-actions">
+      <button id="action-paste">貼り付け</button>
+      <button id="action-clear">クリア</button>
+    </div>
+    <table id="result">
+      <tr id="field1">
+        <th>■文字数（スペース込み）</th>
+        <td class="value"><span>0</span></td>
+        <td class="actions"><button>コピー</button></td>
+      </tr>
+      <tr id="field2">
+        <th>■文字数（スペース無視）</th>
+        <td class="value"><span>0</span></td>
+        <td class="actions"><button>コピー</button></td>
+      </tr>
+      <tr id="field3">
+        <th>■行数</th>
+        <td class="value"><span>0</span></td>
+        <td class="actions"><button>コピー</button></td>
+      </tr>
+      <tr id="field4">
+        <th>■段落数</th>
+        <td class="value"><span>0</span></td>
+        <td class="actions"><button>コピー</button></td>
+      </tr>
+    </table>
+    <p class="notice">※オリジナルの「文字数カウント」（旧URL: http://www1.odn.ne.jp/megukuma/count.htm）サービスとは無関係です。</p>
+    <script>
+      (function () {
+        const textarea = document.querySelector("#textarea");
+        const output1 = document.querySelector("#field1 span");
+        const output2 = document.querySelector("#field2 span");
+        const output3 = document.querySelector("#field3 span");
+        const output4 = document.querySelector("#field4 span");
+
+        document.querySelector("#action-paste").addEventListener("click", async function (event) {
+          const value = await navigator.clipboard.readText();
+          textarea.value = value;
+          update(textarea);
+        });
+
+        document.querySelector("#action-clear").addEventListener("click", async function (event) {
+          textarea.value = "";
+          update(textarea);
+        });
+
+        textarea.addEventListener("input", function (event) {
+          update(this);
+        });
+
+        for (const button of document.querySelectorAll("#result .actions button")) {
+          button.addEventListener("click", function (event) {
+            const value = this.closest("tr").querySelector(".value span").innerText;
+            navigator.clipboard.writeText(value);
+          });
+        }
+
+        function update(textarea) {
+          const text = (textarea.value || "").trim();
+          output1.innerText = "" + +(text.length);
+          output2.innerText = "" + +(text.replace(/\s/g, "").length);
+          output3.innerText = "" + +(text == "" ? 0 : text.split("\n").length);
+          output4.innerText = "" + +(text == "" ? 0 : text.split(/\n{2,}/).length);
+        }
+
+        update(this);
+      })();
+    </script>
+  </body>
+</html>
